@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gemini Lounge | Tonight’s Feature</title>
+  <meta name="description" content="Gemini Lounge QR-powered guest experience." />
+  <style>
+    :root{
+      --bg:#090611;
+      --bg2:#140a22;
+      --card:rgba(255,255,255,0.07);
+      --line:rgba(255,255,255,0.12);
+      --text:#f7f4ff;
+      --muted:#cbbfe3;
+      --gold:#f4d28d;
+      --purple:#8b5cf6;
+      --cyan:#22d3ee;
+      --pink:#f472b6;
+      --shadow:0 20px 50px rgba(0,0,0,.38);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(139,92,246,.22), transparent 30%),
+        radial-gradient(circle at top right, rgba(34,211,238,.14), transparent 22%),
+        radial-gradient(circle at bottom center, rgba(244,114,182,.10), transparent 24%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      min-height:100vh;
+    }
+
+    .wrap{
+      width:min(100%, 460px);
+      margin:0 auto;
+      padding:16px 16px 34px;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:30px;
+      padding:22px 18px 20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04)),
+        linear-gradient(135deg, rgba(139,92,246,.16), rgba(34,211,238,.06));
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      color:var(--gold);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:36px;
+      line-height:1.02;
+      letter-spacing:-0.04em;
+    }
+
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.55;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .stat{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:12px;
+      background:rgba(255,255,255,.04);
+    }
+
+    .label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#b7a8d6;
+      margin-bottom:6px;
+    }
+
+    .value{
+      font-size:14px;
+      line-height:1.35;
+      font-weight:600;
+    }
+
+    .section{
+      margin-top:16px;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:18px;
+      background:var(--card);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .section h2{
+      margin:0 0 10px;
+      font-size:19px;
+      letter-spacing:-0.02em;
+    }
+
+    .section p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+    }
+
+    .feature{
+      margin-top:14px;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(139,92,246,.16), rgba(255,255,255,.04));
+    }
+
+    .feature-visual{
+      min-height:230px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:22px;
+      background:
+        radial-gradient(circle at 28% 30%, rgba(244,114,182,.42), transparent 18%),
+        radial-gradient(circle at 72% 35%, rgba(34,211,238,.32), transparent 18%),
+        radial-gradient(circle at 50% 78%, rgba(139,92,246,.36), transparent 22%),
+        linear-gradient(135deg, #1a102a, #0c0816 68%);
+    }
+
+    .visual-small{
+      color:#f7d9a6;
+      text-transform:uppercase;
+      letter-spacing:.10em;
+      font-size:11px;
+      margin-bottom:8px;
+    }
+
+    .visual-big{
+      font-size:31px;
+      line-height:1.02;
+      font-weight:800;
+      letter-spacing:-0.04em;
+    }
+
+    .feature-body{
+      padding:16px;
+    }
+
+    .tag{
+      display:inline-block;
+      margin-bottom:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      background:rgba(244,210,141,.12);
+      color:var(--gold);
+      border:1px solid rgba(244,210,141,.18);
+      font-size:12px;
+      letter-spacing:.05em;
+      text-transform:uppercase;
+    }
+
+    .feature-title{
+      font-size:24px;
+      line-height:1.05;
+      margin:0 0 8px;
+      font-weight:800;
+      letter-spacing:-0.03em;
+    }
+
+    .list{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+    }
+
+    .num{
+      width:28px;
+      min-width:28px;
+      height:28px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      font-size:13px;
+      font-weight:700;
+      color:#0b0710;
+      background:linear-gradient(135deg, var(--gold), #fff0c8);
+    }
+
+    .special{
+      margin-top:14px;
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(244,210,141,.18);
+      background:rgba(244,210,141,.06);
+    }
+
+    .special-title{
+      color:var(--gold);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+      font-weight:700;
+    }
+
+    .special-copy{
+      color:var(--text);
+      font-size:15px;
+      line-height:1.5;
+    }
+
+    .cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:12px 16px;
+      border-radius:16px;
+      text-decoration:none;
+      font-weight:700;
+      letter-spacing:-0.01em;
+      transition:transform .2s ease;
+      flex:1 1 180px;
+    }
+
+    .btn:active{transform:scale(.98)}
+
+    .btn-primary{
+      color:#0d0713;
+      background:linear-gradient(135deg, var(--gold), #fff1cb);
+    }
+
+    .btn-secondary{
+      color:var(--text);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+    }
+
+    .divider{
+      height:1px;
+      margin:16px 0;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+    }
+
+    .footer{
+      margin-top:16px;
+      text-align:center;
+      color:#aa9cc8;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    @media (max-width:380px){
+      h1{font-size:31px}
+      .hero-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+
+    <section class="hero">
+      <div class="eyebrow">Gemini Lounge • Bandon, Oregon</div>
+      <h1>Where Duality<br>Meets Vibe</h1>
+      <p class="sub">
+        Welcome to tonight’s featured Gemini Lounge experience. One scan unlocks the story, energy, and atmosphere behind the moment.
+      </p>
+
+      <div class="hero-grid">
+        <div class="stat">
+          <div class="label">Tonight’s Feature</div>
+          <div class="value">Gemini Twist</div>
+        </div>
+        <div class="stat">
+          <div class="label">Experience</div>
+          <div class="value">Cocktail + vibe + story</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Featured Pour</h2>
+      <p>
+        A signature concept built to reflect Gemini’s identity — smooth, layered, and memorable from first look to final sip.
+      </p>
+
+      <article class="feature">
+        <div class="feature-visual">
+          <div>
+            <div class="visual-small">Tonight’s Signature</div>
+            <div class="visual-big">Gemini<br>Twist</div>
+          </div>
+        </div>
+        <div class="feature-body">
+          <div class="tag">Light + Dark • Smooth + Bold</div>
+          <h3 class="feature-title">Gemini Twist</h3>
+          <p>
+            Bright on the front end, deeper on the finish — a drink built around contrast, energy, and the kind of atmosphere that makes a night stick with you.
+          </p>
+        </div>
+      </article>
+
+      <div class="special">
+        <div class="special-title">Tonight’s Vibe</div>
+        <div class="special-copy">
+          Crafted for slow starts, strong finishes, and the kind of night that can go either direction.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What you just unlocked</h2>
+      <div class="list">
+        <div class="item">
+          <div class="num">1</div>
+          <div>
+            <strong>Drink identity</strong><br>
+            More than a menu item — this gives the drink personality and presence.
+          </div>
+        </div>
+        <div class="item">
+          <div class="num">2</div>
+          <div>
+            <strong>Atmosphere connection</strong><br>
+            The experience ties the featured pour directly into the Gemini Lounge vibe.
+          </div>
+        </div>
+        <div class="item">
+          <div class="num">3</div>
+          <div>
+            <strong>Future unlocks</strong><br>
+            Later versions can include event drops, featured specials, bartender videos, and social links.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Why this matters</h2>
+      <p>
+        Instead of a guest just ordering and moving on, this creates a branded moment. It increases perceived value, feels elevated, and gives Gemini Lounge a digital experience layer without changing the natural flow of the night.
+      </p>
+
+      <div class="divider"></div>
+
+      <div class="cta">
+        <a class="btn btn-primary" href="#" onclick="alert('This button can later link to specials, reservations, Instagram, or events.'); return false;">Unlock Tonight’s Feature</a>
+        <a class="btn btn-secondary" href="tel:+15413292145">Call Gemini Lounge</a>
+      </div>
+    </section>
+
+    <div class="footer">
+      Gemini Lounge • Bandon, Oregon<br>
+      ScanCraft demo experience
+    </div>
+
+  </main>
+</body>
+</html>
