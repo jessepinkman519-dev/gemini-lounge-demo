@@ -3,479 +3,699 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gemini Lounge | Tonight’s Feature</title>
-  <meta name="description" content="Gemini Lounge QR-powered guest experience." />
+  <title>Gemini Lounge | Elevated Experience Demo</title>
+  <meta name="description" content="Gemini Lounge digital experience demo powered by ScanCraft." />
   <style>
     :root{
-      --bg:#090611;
-      --bg2:#140a22;
-      --card:rgba(255,255,255,0.07);
-      --line:rgba(255,255,255,0.12);
-      --text:#f7f4ff;
-      --muted:#cbbfe3;
-      --gold:#f4d28d;
-      --purple:#8b5cf6;
-      --cyan:#22d3ee;
-      --pink:#f472b6;
-      --shadow:0 20px 50px rgba(0,0,0,.38);
+      --bg:#0a0a0d;
+      --bg2:#111118;
+      --panel:rgba(255,255,255,0.06);
+      --panel-2:rgba(255,255,255,0.08);
+      --text:#f6f1e8;
+      --muted:#c8bba7;
+      --soft:#9a8f81;
+      --gold:#d9b36c;
+      --gold-2:#f0cf92;
+      --line:rgba(255,255,255,0.10);
+      --shadow:0 20px 50px rgba(0,0,0,0.45);
+      --radius:22px;
+      --max:1180px;
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
+    html{scroll-behavior:smooth}
     body{
-      font-family: Arial, Helvetica, sans-serif;
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top left, rgba(139,92,246,.22), transparent 30%),
-        radial-gradient(circle at top right, rgba(34,211,238,.14), transparent 22%),
-        radial-gradient(circle at bottom center, rgba(244,114,182,.10), transparent 24%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      min-height:100vh;
+        radial-gradient(circle at top, rgba(217,179,108,0.12), transparent 30%),
+        linear-gradient(180deg, #09090c 0%, #0c0c10 35%, #111118 100%);
+      line-height:1.5;
+      overflow-x:hidden;
     }
 
-    .wrap{
-      width:min(100%, 460px);
-      margin:0 auto;
-      padding:16px 16px 34px;
-    }
-
-    .hero{
-      position:relative;
-      overflow:hidden;
-      border:1px solid var(--line);
-      border-radius:30px;
-      padding:22px 18px 20px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04)),
-        linear-gradient(135deg, rgba(139,92,246,.16), rgba(34,211,238,.06));
-      box-shadow:var(--shadow);
-    }
-
+    a{text-decoration:none;color:inherit}
+    img{max-width:100%;display:block}
+    .container{width:min(calc(100% - 32px), var(--max));margin:0 auto}
+    .section{padding:84px 0}
     .eyebrow{
       display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.05);
-      color:var(--gold);
-      font-size:12px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      margin-bottom:14px;
-    }
-
-    h1{
-      margin:0 0 10px;
-      font-size:36px;
-      line-height:1.02;
-      letter-spacing:-0.04em;
-    }
-
-    .sub{
-      margin:0;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.55;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr;
       gap:10px;
-      margin-top:18px;
-    }
-
-    .stat{
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:12px;
-      background:rgba(255,255,255,.04);
-    }
-
-    .label{
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:#b7a8d6;
-      margin-bottom:6px;
-    }
-
-    .value{
-      font-size:14px;
-      line-height:1.35;
-      font-weight:600;
-    }
-
-    .section{
-      margin-top:16px;
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:18px;
-      background:var(--card);
-      box-shadow:var(--shadow);
-    }
-
-    .section h2{
-      margin:0 0 10px;
-      font-size:19px;
-      letter-spacing:-0.02em;
-    }
-
-    .section p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.6;
-      font-size:15px;
-    }
-
-    .feature{
-      margin-top:14px;
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(139,92,246,.16), rgba(255,255,255,.04));
-    }
-
-    .feature-image{
-      width:100%;
-      height:240px;
-      object-fit:cover;
-      display:block;
-      background:#120b1c;
-    }
-
-    .feature-visual{
-      min-height:230px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:22px;
-      background:
-        radial-gradient(circle at 28% 30%, rgba(244,114,182,.42), transparent 18%),
-        radial-gradient(circle at 72% 35%, rgba(34,211,238,.32), transparent 18%),
-        radial-gradient(circle at 50% 78%, rgba(139,92,246,.36), transparent 22%),
-        linear-gradient(135deg, #1a102a, #0c0816 68%);
-    }
-
-    .visual-small{
-      color:#f7d9a6;
-      text-transform:uppercase;
-      letter-spacing:.10em;
-      font-size:11px;
-      margin-bottom:8px;
-    }
-
-    .visual-big{
-      font-size:31px;
-      line-height:1.02;
-      font-weight:800;
-      letter-spacing:-0.04em;
-    }
-
-    .feature-body{
-      padding:16px;
-    }
-
-    .tag{
-      display:inline-block;
-      margin-bottom:12px;
-      padding:7px 10px;
-      border-radius:999px;
-      background:rgba(244,210,141,.12);
-      color:var(--gold);
-      border:1px solid rgba(244,210,141,.18);
       font-size:12px;
-      letter-spacing:.05em;
+      letter-spacing:.22em;
       text-transform:uppercase;
+      color:var(--gold-2);
+      margin-bottom:16px;
     }
-
-    .feature-title{
-      font-size:24px;
-      line-height:1.05;
-      margin:0 0 8px;
+    .eyebrow::before{
+      content:"";
+      width:34px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);
+      display:inline-block;
+    }
+    h1,h2,h3,p{margin:0}
+    h1{
+      font-size:clamp(2.5rem, 6vw, 5.7rem);
+      line-height:0.95;
+      letter-spacing:-0.03em;
       font-weight:800;
+    }
+    h2{
+      font-size:clamp(2rem, 4vw, 3.5rem);
+      line-height:1;
+      margin-bottom:18px;
       letter-spacing:-0.03em;
     }
-
-    .list{
-      display:grid;
-      gap:10px;
-      margin-top:14px;
+    h3{
+      font-size:1.15rem;
+      margin-bottom:10px;
+    }
+    p.lead{
+      font-size:clamp(1rem, 2vw, 1.18rem);
+      color:var(--muted);
+      max-width:720px;
     }
 
-    .item{
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter: blur(14px);
+      background:rgba(10,10,13,0.65);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner{
+      width:min(calc(100% - 32px), var(--max));
+      margin:0 auto;
       display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:16px 0;
+      gap:16px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
       gap:12px;
-      align-items:flex-start;
-      padding:12px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:rgba(255,255,255,.04);
-    }
-
-    .num{
-      width:28px;
-      min-width:28px;
-      height:28px;
-      border-radius:999px;
-      display:grid;
-      place-items:center;
-      font-size:13px;
       font-weight:700;
-      color:#0b0710;
-      background:linear-gradient(135deg, var(--gold), #fff0c8);
-    }
-
-    .special{
-      margin-top:14px;
-      padding:14px;
-      border-radius:18px;
-      border:1px solid rgba(244,210,141,.18);
-      background:rgba(244,210,141,.06);
-    }
-
-    .special-title{
-      color:var(--gold);
-      font-size:12px;
       letter-spacing:.08em;
       text-transform:uppercase;
-      margin-bottom:6px;
-      font-weight:700;
+      font-size:0.9rem;
     }
-
-    .special-copy{
-      color:var(--text);
-      font-size:15px;
-      line-height:1.5;
+    .brand-mark{
+      width:38px;height:38px;border-radius:50%;
+      border:1px solid rgba(255,255,255,0.18);
+      display:grid;place-items:center;
+      background:radial-gradient(circle at 30% 30%, rgba(240,207,146,.25), rgba(255,255,255,.02));
+      box-shadow:inset 0 0 25px rgba(255,255,255,0.03);
+      color:var(--gold-2);
+      font-weight:800;
     }
-
-    .event-box{
-      margin-top:14px;
-      padding:14px;
-      border-radius:18px;
-      border:1px solid rgba(34,211,238,.20);
-      background:rgba(34,211,238,.07);
+    .nav-links{
+      display:flex;gap:22px;align-items:center;flex-wrap:wrap;
+      color:var(--muted);
+      font-size:.95rem;
     }
-
-    .event-title{
-      color:var(--cyan);
-      font-size:12px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      margin-bottom:6px;
-      font-weight:700;
-    }
-
-    .event-copy{
-      color:var(--text);
-      font-size:15px;
-      line-height:1.5;
-    }
-
-    .cta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:18px;
-    }
-
+    .nav-links a:hover{color:var(--text)}
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:48px;
-      padding:12px 16px;
-      border-radius:16px;
-      text-decoration:none;
-      font-weight:700;
-      letter-spacing:-0.01em;
-      transition:transform .2s ease, opacity .2s ease;
-      flex:1 1 180px;
+      gap:10px;
+      padding:14px 20px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.12);
+      transition:.25s ease;
+      font-weight:600;
+      cursor:pointer;
     }
-
-    .btn:active{transform:scale(.98)}
-
+    .btn:hover{transform:translateY(-1px)}
     .btn-primary{
-      color:#0d0713;
-      background:linear-gradient(135deg, var(--gold), #fff1cb);
+      background:linear-gradient(135deg,var(--gold),var(--gold-2));
+      color:#16120d;
+      border:none;
+      box-shadow:0 12px 32px rgba(217,179,108,0.22);
     }
-
     .btn-secondary{
+      background:rgba(255,255,255,0.04);
       color:var(--text);
+    }
+
+    .hero{
+      position:relative;
+      min-height:92svh;
+      display:flex;
+      align-items:center;
+      isolation:isolate;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.72)),
+        url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      z-index:-2;
+      transform:scale(1.04);
+      filter:saturate(.9) brightness(.72);
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(217,179,108,.20), transparent 28%),
+        linear-gradient(180deg, rgba(10,10,13,.15), rgba(10,10,13,.82) 70%, var(--bg) 100%);
+      z-index:-1;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:32px;
+      align-items:end;
+      padding:72px 0 50px;
+    }
+    .hero-copy{
+      padding:28px 0;
+    }
+    .hero-copy .sub{
+      color:var(--muted);
+      font-size:1.05rem;
+      max-width:690px;
+      margin:22px 0 28px;
+    }
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+
+    .glass-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(16px);
+    }
+
+    .hero-card{
+      padding:22px;
+      align-self:end;
+    }
+    .hero-card img{
+      border-radius:18px;
+      aspect-ratio:4/5;
+      object-fit:cover;
+      margin-bottom:16px;
+    }
+    .hero-card p{
+      color:var(--muted);
+      font-size:0.96rem;
+    }
+    .hero-card strong{color:var(--text)}
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:22px;
+    }
+    .stat{
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .stat b{
+      display:block;
+      font-size:1.35rem;
+      margin-bottom:6px;
+      color:var(--gold-2);
+    }
+    .stat span{
+      color:var(--soft);
+      font-size:0.88rem;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:26px;
+      align-items:stretch;
+    }
+
+    .panel{
+      padding:26px;
+      background:var(--panel);
       border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .panel p{color:var(--muted)}
+    .panel ul{
+      margin:18px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+    .panel li{margin:8px 0}
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:28px;
+    }
+    .feature-card{
+      padding:24px;
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+    }
+    .icon{
+      width:46px;height:46px;border-radius:14px;
+      display:grid;place-items:center;
+      margin-bottom:16px;
+      background:rgba(217,179,108,0.12);
+      border:1px solid rgba(217,179,108,0.28);
+      color:var(--gold-2);
+      font-weight:800;
+    }
+    .feature-card p{color:var(--muted)}
+
+    .menu-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:28px;
+    }
+    .menu-card{
+      overflow:hidden;
+      border-radius:22px;
+      background:#111118;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:var(--shadow);
+    }
+    .menu-card img{
+      aspect-ratio:4/3;
+      object-fit:cover;
+    }
+    .menu-card-content{
+      padding:20px;
+    }
+    .menu-card-content p{
+      color:var(--muted);
+      margin-top:8px;
+      font-size:.96rem;
     }
 
-    .btn-social{
-      color:#0d0713;
-      background:linear-gradient(135deg, var(--cyan), #b8f5ff);
-      margin-top:12px;
-      width:100%;
-      flex:unset;
+    .experience-wrap{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:26px;
+      align-items:center;
     }
+    .phone{
+      width:min(100%, 390px);
+      margin:0 auto;
+      border-radius:36px;
+      padding:14px;
+      background:#0b0b0f;
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:0 30px 70px rgba(0,0,0,0.5);
+    }
+    .phone-screen{
+      border-radius:28px;
+      overflow:hidden;
+      background:#14141a;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .phone-screen img{
+      aspect-ratio:9/16;
+      object-fit:cover;
+      filter:brightness(.8);
+    }
+    .phone-ui{
+      padding:18px;
+      background:linear-gradient(180deg, rgba(17,17,24,0), rgba(17,17,24,1));
+      margin-top:-110px;
+      position:relative;
+    }
+    .pill{
+      display:inline-flex;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(217,179,108,0.12);
+      border:1px solid rgba(217,179,108,0.22);
+      color:var(--gold-2);
+      font-size:.8rem;
+      margin-bottom:12px;
+    }
+    .phone-ui h3{font-size:1.2rem}
+    .phone-ui p{color:var(--muted);font-size:.92rem}
 
-    .divider{
-      height:1px;
-      margin:16px 0;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+    .cta{
+      text-align:center;
+      padding:34px;
+      border-radius:30px;
+      background:
+        radial-gradient(circle at top, rgba(217,179,108,.16), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,0.10);
+      box-shadow:var(--shadow);
+    }
+    .cta p{
+      color:var(--muted);
+      max-width:760px;
+      margin:14px auto 0;
+    }
+    .cta-actions{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:24px;
     }
 
     .footer{
-      margin-top:16px;
-      text-align:center;
-      color:#aa9cc8;
-      font-size:12px;
-      line-height:1.5;
+      padding:36px 0 50px;
+      color:var(--soft);
+      border-top:1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner{
+      width:min(calc(100% - 32px), var(--max));
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      font-size:.92rem;
     }
 
-    @media (max-width:380px){
-      h1{font-size:31px}
-      .hero-grid{grid-template-columns:1fr}
+    .reveal{
+      opacity:0;
+      transform:translateY(26px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .split,
+      .feature-grid,
+      .menu-grid,
+      .experience-wrap{
+        grid-template-columns:1fr;
+      }
+      .hero{
+        min-height:auto;
+      }
+      .hero-card{
+        max-width:520px;
+      }
+    }
+
+    @media (max-width: 640px){
+      .nav-links{display:none}
+      .section{padding:68px 0}
+      .stats{grid-template-columns:1fr}
+      .hero-actions,
+      .cta-actions{
+        flex-direction:column;
+      }
+      .btn{width:100%}
+      .panel,
+      .feature-card,
+      .menu-card-content,
+      .hero-card,
+      .cta{padding:20px}
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
 
-    <section class="hero">
-      <div class="eyebrow">Gemini Lounge • Bandon, Oregon</div>
-      <h1>Where Duality<br>Meets Vibe</h1>
-      <p class="sub">
-        Welcome to tonight’s featured Gemini Lounge experience. One scan unlocks the story, energy, and atmosphere behind the moment.
-      </p>
-
-      <div class="hero-grid">
-        <div class="stat">
-          <div class="label">Tonight’s Feature</div>
-          <div class="value">Gemini Twist</div>
-        </div>
-        <div class="stat">
-          <div class="label">Experience</div>
-          <div class="value">Cocktail + vibe + story</div>
-        </div>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark">G</span>
+        <span>Gemini Lounge</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#menu">Highlights</a>
+        <a href="#scancraft">Digital Layer</a>
+        <a href="#contact">Contact</a>
       </div>
-    </section>
+    </div>
+  </nav>
 
-    <section class="section">
-      <h2>Featured Pour</h2>
-      <p>
-        A signature concept built to reflect Gemini’s identity — smooth, layered, and memorable from first look to final sip.
-      </p>
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <div class="eyebrow">Bandon, Oregon · Elevated Nights</div>
+        <h1>More Than a Lounge.<br/>A Vibe You Step Into.</h1>
+        <p class="sub">
+          Gemini Lounge blends atmosphere, style, and memory into one experience.
+          This concept demo shows how a premium digital layer can extend that feeling
+          beyond the room itself — from first impression to repeat visit.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#experience">Explore the Experience</a>
+          <a class="btn btn-secondary" href="#scancraft">See the Digital Layer</a>
+        </div>
 
-      <article class="feature">
-        <!-- REAL IMAGE SLOT: replace image URL below later with an actual Gemini drink/photo -->
-        <img
-          class="feature-image"
-          src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80"
-          alt="Featured Gemini Lounge cocktail"
-        />
-
-        <!-- If you ever want to use the abstract visual instead of a real image,
-             delete the <img> above and uncomment this block:
-        <div class="feature-visual">
-          <div>
-            <div class="visual-small">Tonight’s Signature</div>
-            <div class="visual-big">Gemini<br>Twist</div>
+        <div class="stats">
+          <div class="stat">
+            <b>Atmosphere First</b>
+            <span>Designed to match the feel before the first drink lands.</span>
+          </div>
+          <div class="stat">
+            <b>Mobile Ready</b>
+            <span>Built to feel smooth and premium on a customer’s phone.</span>
+          </div>
+          <div class="stat">
+            <b>Story Driven</b>
+            <span>Turns a venue into an experience people remember and share.</span>
           </div>
         </div>
-        -->
+      </div>
 
-        <div class="feature-body">
-          <div class="tag">Light + Dark • Smooth + Bold</div>
-          <h3 class="feature-title">Gemini Twist</h3>
-          <p>
-            Bright on the front end, deeper on the finish — a drink built around contrast, energy, and the kind of atmosphere that makes a night stick with you.
+      <div class="hero-card glass-card reveal">
+        <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1200&q=80" alt="Cinematic lounge atmosphere" />
+        <h3>First Impression Matters</h3>
+        <p>
+          A guest should feel Gemini before they even walk in. This demo is built to
+          communicate that same mood digitally: <strong>clean, moody, premium, memorable.</strong>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="split">
+        <div class="panel reveal">
+          <div class="eyebrow">The Concept</div>
+          <h2>Gemini has a tone.<br/>This gives it reach.</h2>
+          <p class="lead">
+            Not every business needs more noise. Some need better presence. Gemini Lounge has
+            the kind of atmosphere that deserves a digital presentation matching the room: classy,
+            cinematic, and easy to connect with.
           </p>
         </div>
-      </article>
-
-      <div class="special">
-        <div class="special-title">Tonight’s Vibe</div>
-        <div class="special-copy">
-          Crafted for slow starts, strong finishes, and the kind of night that can go either direction.
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>What you just unlocked</h2>
-      <div class="list">
-        <div class="item">
-          <div class="num">1</div>
-          <div>
-            <strong>Drink identity</strong><br>
-            More than a menu item — this gives the drink personality and presence.
-          </div>
-        </div>
-        <div class="item">
-          <div class="num">2</div>
-          <div>
-            <strong>Atmosphere connection</strong><br>
-            The experience ties the featured pour directly into the Gemini Lounge vibe.
-          </div>
-        </div>
-        <div class="item">
-          <div class="num">3</div>
-          <div>
-            <strong>Future unlocks</strong><br>
-            Later versions can include event drops, featured specials, bartender videos, and social links.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Tonight Only</h2>
-      <p>
-        Scan again later to unlock rotating specials, featured drinks, and live event drops inside Gemini Lounge.
-      </p>
-
-      <div class="special">
-        <div class="special-title">Limited Feature</div>
-        <div class="special-copy">
-          Gemini Twist is tonight’s highlighted experience — featured for guests looking for something elevated, smooth, and memorable.
+        <div class="panel reveal">
+          <h3>Why this works</h3>
+          <ul>
+            <li>Creates a stronger first impression when shared by text, QR, or social.</li>
+            <li>Lets customers preview the vibe before visiting.</li>
+            <li>Highlights drinks, events, and atmosphere without feeling cluttered.</li>
+            <li>Gives Gemini something modern and memorable without losing personality.</li>
+          </ul>
         </div>
       </div>
 
-      <div class="event-box">
-        <div class="event-title">Event Energy</div>
-        <div class="event-copy">
-          This system can also spotlight live music nights, guest DJs, themed weekends, or hidden specials tied to specific nights.
+      <div class="feature-grid">
+        <div class="feature-card reveal">
+          <div class="icon">01</div>
+          <h3>Atmosphere Capture</h3>
+          <p>Visual storytelling that reflects the mood of the lounge instead of generic bar marketing.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">02</div>
+          <h3>Event Promotion</h3>
+          <p>Feature live nights, specials, signature drinks, and updates in a cleaner presentation.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">03</div>
+          <h3>Shareable Experience</h3>
+          <p>A link or QR becomes a polished destination instead of just a plain social profile.</p>
         </div>
       </div>
-
-      <!-- Replace the Instagram URL below with Gemini's real page later -->
-      <a class="btn btn-social" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-        Follow Gemini Lounge on Instagram
-      </a>
-    </section>
-
-    <section class="section">
-      <h2>Why this matters</h2>
-      <p>
-        Instead of a guest just ordering and moving on, this creates a branded moment. It increases perceived value, feels elevated, and gives Gemini Lounge a digital experience layer without changing the natural flow of the night.
-      </p>
-
-      <div class="divider"></div>
-
-      <div class="cta">
-        <a class="btn btn-primary" href="#" onclick="alert('This can later link to specials, reservations, VIP access, or event drops.'); return false;">
-          Unlock Tonight’s Feature
-        </a>
-        <a class="btn btn-secondary" href="tel:+15413292145">
-          Call Gemini Lounge
-        </a>
-      </div>
-    </section>
-
-    <div class="footer">
-      Gemini Lounge • Bandon, Oregon<br>
-      ScanCraft demo experience
     </div>
+  </section>
 
-  </main>
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="experience-wrap">
+        <div class="reveal">
+          <div class="eyebrow">Mobile Experience</div>
+          <h2>Built for the way people actually discover places now.</h2>
+          <p class="lead">
+            Someone hears about Gemini. They scan a card, tap a link, or get sent a page.
+            Instead of random info, they land in a curated experience that instantly communicates
+            taste, atmosphere, and confidence.
+          </p>
+
+          <div class="feature-grid" style="grid-template-columns:1fr 1fr; margin-top:28px;">
+            <div class="feature-card">
+              <div class="icon">A</div>
+              <h3>Scan</h3>
+              <p>QR on a table card, flyer, or business card opens the experience instantly.</p>
+            </div>
+            <div class="feature-card">
+              <div class="icon">B</div>
+              <h3>Feel</h3>
+              <p>The visual style mirrors the real venue, building anticipation and curiosity.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone reveal">
+          <div class="phone-screen">
+            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&q=80" alt="Phone view of lounge experience" />
+            <div class="phone-ui">
+              <span class="pill">Live Demo Concept</span>
+              <h3>Tonight at Gemini Lounge</h3>
+              <p>
+                Signature cocktails, moody lighting, intimate energy, and a polished
+                customer-facing digital experience that feels intentional from the first tap.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="menu">
+    <div class="container">
+      <div class="eyebrow">Featured Highlights</div>
+      <h2 class="reveal">Signature moments deserve a premium frame.</h2>
+      <p class="lead reveal">
+        These sections can be swapped to match Gemini’s real offerings, events, featured drinks,
+        music nights, or customer favorites.
+      </p>
+
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <img src="https://images.unsplash.com/photo-1516997121675-4c2d1684aa3e?auto=format&fit=crop&w=1200&q=80" alt="Signature cocktail" />
+          <div class="menu-card-content">
+            <h3>Signature Cocktails</h3>
+            <p>Present featured drinks with cinematic imagery and elegant descriptions that fit the brand.</p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal">
+          <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80" alt="Live event atmosphere" />
+          <div class="menu-card-content">
+            <h3>Event Nights</h3>
+            <p>Promote upcoming nights, private events, or entertainment in a more polished, modern way.</p>
+          </div>
+        </div>
+
+        <div class="menu-card reveal">
+          <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=1200&q=80" alt="Lounge mood interior" />
+          <div class="menu-card-content">
+            <h3>The Mood Itself</h3>
+            <p>Sometimes the product is the room. This turns atmosphere into part of the pitch.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="scancraft">
+    <div class="container">
+      <div class="split">
+        <div class="panel reveal">
+          <div class="eyebrow">Powered by ScanCraft</div>
+          <h2>A digital layer, not digital clutter.</h2>
+          <p class="lead">
+            The idea is simple: preserve Gemini’s vibe while making it easier for people to discover,
+            remember, and return. ScanCraft doesn’t replace the real experience — it strengthens it.
+          </p>
+        </div>
+
+        <div class="panel reveal">
+          <h3>Possible uses</h3>
+          <ul>
+            <li>QR business cards that open directly into Gemini’s experience page.</li>
+            <li>Table cards for featured drinks, events, or specials.</li>
+            <li>Simple share links for word-of-mouth promotion.</li>
+            <li>Seasonal refreshes without rebuilding the whole presence every time.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card reveal">
+          <div class="icon">I</div>
+          <h3>Physical to Digital</h3>
+          <p>A printed card or table sign becomes an elegant doorway into Gemini’s online presence.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">II</div>
+          <h3>Story + Style</h3>
+          <p>Not just information. The goal is to deliver feel, mood, and confidence instantly.</p>
+        </div>
+        <div class="feature-card reveal">
+          <div class="icon">III</div>
+          <h3>Flexible Growth</h3>
+          <p>Start simple, then add menus, videos, event sections, promotions, or loyalty layers later.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="cta reveal">
+        <div class="eyebrow" style="justify-content:center;">Gemini Lounge × ScanCraft</div>
+        <h2>Built to show what Gemini could feel like online.</h2>
+        <p>
+          This is a concept demo designed to show the direction: premium presentation,
+          clean mobile experience, and a digital presence that actually fits the atmosphere.
+          The next step would be customizing this version directly for Gemini Lounge.
+        </p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="javascript:void(0)">Build Gemini’s Version</a>
+          <a class="btn btn-secondary" href="#top">Back to Top</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>Gemini Lounge Demo Experience</div>
+      <div>Concept Presentation by ScanCraft</div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
